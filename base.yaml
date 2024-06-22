@@ -1,0 +1,116 @@
+DEVICE: 'cuda'
+TRAIN:
+  GEN:
+    LR: 0.0001
+    WD: 0.0001
+    factor: 0.9
+    patience: 1
+    threshold: 0.01
+    min_lr: 0.00000003
+    metrics: 'train.mean_loss_param'
+  with_body_label: False
+  segment_parallel: False
+  CosineAnnealingWarmRestarts: False
+  use_drop_first: True
+  use_denoice: False
+  use_replace_noice: False
+  no_denoice: False
+  replace_noice_pc_rate: 0.2
+
+MODEL:
+  TpointNet2: False
+  Outline: True
+  Outline_boundary: False
+  add_background: False
+  add_twise_noise: False
+  use_project_image: False
+  use_back_wang: False
+  use_transformer: False
+  use_attention: False
+  use_mdmtransformer: False
+
+Transformer:
+  num_hidden_layers: 3
+  hidden_size: 1024
+  num_attention_heads: 2
+  intermediate_size: 512
+  hidden_dropout_prob: 0.1
+  
+MDMTransformer:
+  latent_dim: 1536
+  dropout: 0.1
+  num_heads: 4
+  ff_size: 1024
+  activation: 'gelu'
+  num_layers: 8
+  data_rep: 'rot6d'
+  njoints: 24
+  nfeats: 3
+  seqlen: 16
+  
+LOSS:
+  chamfer_loss: False
+  nn_loss: False
+  flow_loss: False
+  end_loss: False
+  pose_loss: True
+  zmp_loss: False
+  bone_loss: False
+
+TrainDataset:
+  dataset_path: 'datasets_path'
+  use_aug: False
+  use_rot: False
+  concat_info: False
+  use_straight: False
+  use_pc_w_raw_z: False
+  ret_raw_pc: True
+  seqlen: 16
+  drop_first_n: 0
+  use_trans_to_normalize: True
+  replace_noice_pc: False
+  replace_noice_pc_rate: False
+  replace_pc_strategy: 'random'
+  noise_distribution: 'uniform'
+  add_noice_pc: False
+  set_body_label_all_one: False
+  random_permutation: False
+  use_boundary: False
+  inside_random: False
+  use_sample: False
+  range_image: False
+  range_image_W: 512
+  range_image_H: 512
+  fov_up: 12.5
+  
+  dataset_ids:
+    - lidarcap_train
+  
+TestDataset:
+  dataset_path: "datasets_path"
+  use_aug: False
+  concat_info: False
+  use_rot: False
+  use_straight: False
+  use_pc_w_raw_z: False
+  ret_raw_pc: True
+  seqlen: 16
+  drop_first_n: 0
+  use_trans_to_normalize: True
+  replace_pc_strategy: 'random'
+  replace_noice_pc: False
+  replace_noice_pc_rate: False
+  noise_distribution: 'uniform'
+  add_noice_pc: False
+  set_body_label_all_one: False
+  random_permutation: False
+  use_boundary: False
+  inside_random: False
+  use_sample: False
+  range_image: False
+  range_image_W: 512
+  range_image_H: 512
+  fov_up: 12.5
+  
+  dataset_ids:
+    - lidarcap_test
