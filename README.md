@@ -1,7 +1,9 @@
 # Download LiDARHuman26M dataset
 - Download the dataset from the link: http://www.lidarhumanmotion.net/lidarcap/.
 - Download the weight file from the link: https://pan.baidu.com/s/1J0WEdkVCE4vlfBb1RWZl9w  code: oafj
-- Download `basicModel_neutral_lbs_10_207_0_v1.0.0.pkl`,`J_regressor_extra.npy` and put it in data directory.
+- Download `basicModel_neutral_lbs_10_207_0_v1.0.0.pkl`,`J_regressor_extra.npy` from link: https://smpl.is.tue.mpg.de/
+and put it in data directory.
+
 
 If you want to deal with your own dataset, refer to `datasets/preprocess/lidarcap.py` to process your data into a format can be handled by LiDARCap.
 
@@ -27,12 +29,12 @@ pip install joblib
 pip install chumpy
 ```
 
-### 3. train 
+### 3. Train 
 ```
 python train.py --threads x --gpu x --dataset lidarcap
 ```
 
-### 4.eval
+### 4. Eval
 ```
 python train.py --threads x --gpu x --dataset lidarcap --ckpt_path best-train-loss21.pth --eval --eval_bs 4 --debug
 ```
@@ -54,3 +56,14 @@ poses_to_joints: 100%|██████████| 188/188 [00:03<00:00, 57.2
 0.8611590795605859
 0.9491181896360409
 ```
+
+### Citation
+```
+@article{Li2022LiDARCapLM,
+  title={LiDARCap: Long-range Markerless 3D Human Motion Capture with LiDAR Point Clouds},
+  author={Jialian Li and Jingyi Zhang and Zhiyong Wang and Siqi Shen and Chenglu Wen and Yuexin Ma and Lan Xu and Jingyi Yu and Cheng Wang},
+  journal={2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2022},
+  pages={20470-20480},
+  url={https://api.semanticscholar.org/CorpusID:247762999}
+}```
